@@ -1,7 +1,7 @@
-import React from 'react'
 import { TabBar } from '../lib/antd'
 import './styles/tabbar.less'
 import { Hot, Ships, Profile } from './constant'
+import { Icon } from '../lib/FontIcon'
 
 interface MainPropsState {
 	selectedTab: string,
@@ -9,7 +9,7 @@ interface MainPropsState {
 	fullScreen: boolean
 }
 
-export default class Main extends Component<{}, MainPropsState> {
+export default class Main extends Component<{}, MainPropsState>{
 
 	constructor(props: any) {
 		super(props)
@@ -20,25 +20,12 @@ export default class Main extends Component<{}, MainPropsState> {
 		}
 	}
 
-	renderIcon(icon: string) {
-		return (
-			<div
-				style={{
-					height: 22,
-					width: 22,
-					background: `url(https://gw.alipayobjects.com/zos/rmsportal/${icon}.svg) center center /  21px 21px no-repeat`
-				}}
-			/>
-		)
-	}
-
 	renderTabBar() {
 		// 这里放一些东西
 		let titles = ['热点', '船舶', '个人']
 		let keys = ['hot', 'ships', 'profile']
 		let components = [Hot, Ships, Profile]
-		let icons = ['sifuoDUQdAFKAVcFGROC', 'BTSsmHkPsQSPTktcXyTV', 'asJMfBrNqpMMlVpeInPQ']
-		let selectedIcons = ['iSrlOTqrKddqbOmlvUfq', 'ekLecvKBnRazVLXbWOnE', 'gjpzzcrPMkhfEqgbYvmN']
+		let icons = ['icon-redian2', 'icon-lunchuan', 'icon-my']
 
 		return (
 			<TabBar
@@ -52,8 +39,8 @@ export default class Main extends Component<{}, MainPropsState> {
 						<TabBar.Item
 							title={titles[index]}
 							key={keys[index]}
-							icon={this.renderIcon(icons[index])}
-							selectedIcon={this.renderIcon(selectedIcons[index])}
+							icon={<Icon name={icons[index]} size={24} color={'gray'} />}
+							selectedIcon={<Icon name={icons[index]} size={24} color={'rgb(51, 163, 244)'} />}
 							selected={this.state.selectedTab === keys[index]}
 							badge={0}
 							dot={false}
@@ -63,7 +50,7 @@ export default class Main extends Component<{}, MainPropsState> {
 								});
 							}}
 						>
-							<Component />
+							<Component title={titles[index]} />
 						</TabBar.Item>
 					)
 				})}

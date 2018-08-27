@@ -1,15 +1,30 @@
-import React, { Component } from 'react'
-
-interface HotState{
+import { NavBarPage, NavBarPageProps, NavBarPageState } from '../lib/NavBarPage'
+interface HotState extends NavBarPageState {
 }
 
-interface HotProps{
+interface HotProps extends NavBarPageProps {
 }
 
-export class Hot extends Component<HotProps, HotState>{
-	render(){
+export class Hot extends NavBarPage<HotProps, HotState>{
+
+	constructor(props: HotProps) {
+		super(props)
+	}
+
+	componentDidMount() {
+		this.setState({
+			stateTitle: '新闻热点',
+			mode: 'light'
+		})
+	}
+
+	renderPage() {
 		return (
-			<div>热点界面</div>
+			<div
+				style={{ position: 'fixed',height: '100%', width: '100%'}}
+			>
+				<div>新闻热点</div>
+			</div>
 		)
 	}
 }
