@@ -7,6 +7,7 @@ declare global {
 	interface Window {
 		Component: typeof _Component
 		React: typeof _React
+		__apiList: any
 	}
 
 	const React: typeof _React

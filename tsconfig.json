@@ -60,6 +60,7 @@
   "include": [
     "src/**/*.tsx",
     "src/**/*.ts",
-    "typings/*.d.ts"
+    "typings/*.d.ts",
+		"/Users/john/Developer/Node/ship-win/@types/**/*.d.ts"
   ]
 }

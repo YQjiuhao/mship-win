@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = function (nwb) {
 	return {
 		type: 'react-app',
