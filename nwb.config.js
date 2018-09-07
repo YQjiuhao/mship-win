@@ -28,13 +28,13 @@ module.exports = function (nwb) {
 				}
 			},
 		},
-		// devServer: {
-		// 	hot: true,
-		// 	allowedHosts: [
-		// 		'localhost',
-		// 		'127.0.0.1',
-		// 		'0.0.0.0'
-		// 	],
-		// },
+		devServer: {
+			hot: true,
+			allowedHosts: [
+				'localhost',
+				'127.0.0.1',
+				'0.0.0.0'
+			],
+		},
 	}
 }

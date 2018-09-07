@@ -1,24 +1,22 @@
 import { NavBarPage, NavBarPageProps, NavBarPageState } from '../lib/NavBarPage'
-interface HotState extends NavBarPageState {
+interface HotPageState extends NavBarPageState {
 }
 
-interface HotProps extends NavBarPageProps {
+interface HotPageProps extends NavBarPageProps {
 }
 
-export class Hot extends NavBarPage<HotProps, HotState>{
+export class HotPage extends NavBarPage<HotPageProps, HotPageState>{
 
-	constructor(props: HotProps) {
+	protected title = '热点'
+
+	public constructor(props: HotPageProps) {
 		super(props)
 	}
 
-	componentDidMount() {
-		this.setState({
-			stateTitle: '新闻热点',
-			mode: 'light'
-		})
+	public componentDidMount() {
 	}
 
-	renderPage() {
+	protected pageRender() {
 		return (
 			<div
 				style={{ position: 'fixed',height: '100%', width: '100%'}}

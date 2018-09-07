@@ -1,41 +1,70 @@
 // 这个组键为基类NavigationBar Page
-import { NavBar, Icon } from './antd'
+import { NavBar, Icon } from './antd-mobile'
+import { history } from '../../config/route';
+
 export interface NavBarPageState {
-	stateTitle: string,		// 标题
-	onLeftClick: () => void,	// back回调
-	rightContent: any,		// 右边内容
-	leftContent: any 		// 左边内容
-	mode?: "dark" | "light",			// mode values : 'dark','light'
-	icon: string,
 }
 
 export interface NavBarPageProps {
-	title: string, 			// 标题
+	onLeftClick?: () => void
+	className?: string
 }
 
-export class NavBarPage<P, S> extends Component<NavBarPageProps & P, NavBarPageState & S>{
+const styles = {
+	wrapper: {},
+	body: {},
+	container: {}
+}
 
-	constructor(props: NavBarPageProps & P) {
-		super(props)
-	}
+styles.wrapper = {
+	height: '100%',
+	position: 'relative',
+	display: 'flex',
+	flexDirection: 'column'
+}
 
-	// 界面渲染
-	public renderPage() { }
+styles.body = {
+	flex: 1,
+	display: 'flex',
+	flexDirection: 'column'
+}
 
-	render() {
-		let { stateTitle, onLeftClick, rightContent, icon, mode, leftContent } = this.state
-		let { title } = this.props
+styles.container = {
+	height: '100%',
+	width: '100%',
+	overflow: 'scroll'
+}
 
+export abstract class NavBarPage<P={}, S={}> extends Component<NavBarPageProps & P, NavBarPageState & S>{
+	protected abstract title: string 	// 标题
+	protected rightContent?: () => void	// React.ReactNode | void
+	protected icon?: React.ReactNode = ''
+	protected mode?: string = 'light'	// "dark" | "light"
+	protected leftContent?: () => void	// React.ReactNode | void
+	protected hasBack: boolean = false
+	protected abstract pageRender(): React.ReactNode
+
+	public render() {
+		let { onLeftClick } = this.props
+		// onLeftClick || (this.hasBack ? () => history.goForward() : undefined)
 		return (
-			<div>
+			<div style={{ ...styles.wrapper }} className={this.props.className}>
 				<NavBar
-					mode={mode}
-					icon={icon}
-					onLeftClick={onLeftClick}
-					rightContent={rightContent}
-				>{stateTitle || title}</NavBar>
-				{this.renderPage()}
+					mode={this.mode as "dark" | "light"}
+					icon={this.hasBack ? (this.icon ? this.icon : <Icon type="left" />) : ''}
+					onLeftClick={onLeftClick || (this.hasBack ? () => history.goBack() : undefined)}
+					rightContent={this.rightContent}
+					leftContent={this.leftContent}
+				>{this.title}</NavBar>
+
+				<div style={{ ...styles.body }}>
+					<div style={{ ...styles.container }}
+					>
+						{this.pageRender()}
+					</div>
+				</div>
 			</div>
 		)
 	}
+
 }

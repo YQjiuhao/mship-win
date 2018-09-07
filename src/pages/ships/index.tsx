@@ -1,24 +1,20 @@
 import { NavBarPage, NavBarPageProps, NavBarPageState } from '../lib/NavBarPage'
-import { Icon } from '../lib/FontIcon'
 
-interface ShipsState extends NavBarPageState {
+interface ShipsPageState extends NavBarPageState {
 }
 
-interface ShipsProps extends NavBarPageProps {
+interface ShipsPageProps extends NavBarPageProps {
 }
 
-export class Ships extends NavBarPage<ShipsProps, ShipsState>{
-
-	componentDidMount() {
-		this.setState({
-			mode:'light'
-		})
+export class ShipsPage extends NavBarPage<ShipsPageProps, ShipsPageState>{
+	protected title = '船舶'
+	public componentDidMount() {
 	}
 
-	renderPage() {
+	protected pageRender() {
 		return (
-			<div style={{ position: 'fixed',height: '100%', width: '100%'}}>
-				<Icon name={'icon-lunchuan'} size={30}></Icon>
+			<div style={{ height: '100%', width: '100%' }}>
+				船舶界面
 			</div>
 		)
 	}

@@ -16,7 +16,8 @@ interface RouterProps {
 
 export {
 	Route,
-	history
+	history,
+	Switch
 }
 
 export class Router extends Component<RouterState, RouterProps>{
@@ -24,9 +25,13 @@ export class Router extends Component<RouterState, RouterProps>{
 		let { children, ...rest } = this.props
 		return (
 			<ReactRouter history={history}{...rest}>
-				<Switch>
-					{this.props.children}
-				</Switch>
+				<Route render={({ location }) => (
+					<Switch location={location}>
+						{this.props.children}
+					</Switch>
+				)}>
+
+				</Route>
 			</ReactRouter>
 		)
 	}

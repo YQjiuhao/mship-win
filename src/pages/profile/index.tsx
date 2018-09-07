@@ -1,22 +1,32 @@
 import { NavBarPage, NavBarPageProps, NavBarPageState } from '../lib/NavBarPage'
+import { history } from '../../config/route';
+import { Routes } from './config/routes';
 
-interface ProfileState extends NavBarPageState{
+
+interface ProfileState extends NavBarPageState {
+	disabled: boolean
 }
 
-interface ProfileProps extends NavBarPageProps{
+interface ProfileProps extends NavBarPageProps {
 }
 
-export class Profile extends NavBarPage<ProfileProps, ProfileState>{
-
-	componentDidMount(){
-		this.setState({
-			stateTitle:'个人中心',
-			mode:'light'
-		})
+export class ProfilePage extends NavBarPage<ProfileProps, ProfileState>{
+	protected title = '个人中心'
+	componentDidMount() {
 	}
-	renderPage(){
+
+	protected pageRender() {
+		
 		return (
-			<div style={{ position: 'fixed',height: '100%', width: '100%'}}>个人中心</div>
+			<div>
+				<Routes/>
+				{/* <a onClick={()=>{
+					history.push('/profile/test')
+				}}>
+					点击Push
+				</a> */}
+			</div>
 		)
 	}
 }
+

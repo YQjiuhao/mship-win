@@ -1,27 +1,38 @@
 import moment from 'moment'
-import 'jquery'
-import { API_HOST } from '../../config/config';
-const storage = require('local-storage')
-
+import { API_HOST, TOKEN_KEY, USER_KEY, EXPRIRE_KEY } from '../../config/utils';
+import { cache } from './cache'
 
 namespace main {
 	const TOKEN_ADVANCE_SECENDS = 60
 
-	namespace token {
-
+	namespace tokenN {
 		interface TokenInitParam {
 			token?: string
 			user?: server.user.DToken,// 登录用户类型
 			expire?: string
 		}
-
-		export class Token {
-			init(info?: (param: TokenInitParam) => any) {
-				// 这里面需要知道什么东西
-
-			}
+		export function init(info?: (param: TokenInitParam) => any) {
+			Promise.all([
+				cache.getItem(TOKEN_KEY),
+				cache.getItem(USER_KEY),
+				cache.getItem(EXPRIRE_KEY),
+			]).then(([token, user, expire]) => {
+				//到期时间处理
+				if (expire && user && token) {
+					//计算时间差
+					let diff = moment(expire).diff(moment(), 'second')
+					if (diff > TOKEN_ADVANCE_SECENDS) {
+						//返回信息
+						info && info({ token, user, expire })
+						return
+					}
+				}
+				//不满足任何条件直接返回空
+				info && info({})
+			})
 		}
 	}
+
 	//ajax处理
 	namespace ajaxN {
 		//為array增加includes函數
@@ -249,7 +260,7 @@ namespace main {
 			return new Promise((resolve, reject) => {
 				//默认url
 				url = url || $(data).prop('action')
-				if(!(/^https?:\/\//.test(url))){
+				if (!(/^https?:\/\//.test(url))) {
 					url = API_HOST + url
 				}
 				//调用ajax
@@ -310,6 +321,15 @@ namespace main {
 		//创建API
 		export const api = createApi(window.__apiList)
 	}
+
+
+	$(window).on('load', () => {
+		// 我现在要做的不过就是
+		// 监听登录
+		// 监听登出
+		// 监听token过期
+		// login
+	})
 
 	export const setToken = ajaxN.setToken
 
