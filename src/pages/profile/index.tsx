@@ -1,6 +1,6 @@
 import { NavBarPage, NavBarPageProps, NavBarPageState } from '../lib/NavBarPage'
 import { history } from '../../config/route';
-import { Routes } from './config/routes';
+// import { Routes } from './config/routes';
 
 
 interface ProfileState extends NavBarPageState {
@@ -15,13 +15,11 @@ export class ProfilePage extends NavBarPage<ProfileProps, ProfileState>{
 	componentDidMount() {
 	}
 
-	protected pageRender() {
-		
+	protected pageRender() {		
 		return (
 			<div>
-				<Routes/>
 				{/* <a onClick={()=>{
-					history.push('/profile/test')
+					history.push('/profile/testA')
 				}}>
 					点击Push
 				</a> */}

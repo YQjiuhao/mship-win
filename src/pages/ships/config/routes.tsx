@@ -1,17 +1,17 @@
-import { Router, Route } from '../../../config/route'
+import { Switch, Route } from '../../../config/route'
 
-interface RoutesState{
+interface RoutesState {
 }
 
-interface RoutesProps{
+interface RoutesProps {
 }
 
 export class Routes extends Component<RoutesProps, RoutesState>{
-	render(){
+	render() {
 		return (
-			<Router>
-				<Route />
-			</Router>
+			<Switch>
+				{/* <Route /> 配置你的路由 */}
+			</Switch>
 		)
 	}
 }

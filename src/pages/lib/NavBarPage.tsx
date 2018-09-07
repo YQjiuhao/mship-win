@@ -1,6 +1,7 @@
 // 这个组键为基类NavigationBar Page
 import { NavBar, Icon } from './antd-mobile'
 import { history } from '../../config/route';
+import { CSSProperties } from 'react'
 
 export interface NavBarPageState {
 }
@@ -10,29 +11,23 @@ export interface NavBarPageProps {
 	className?: string
 }
 
-const styles = {
-	wrapper: {},
-	body: {},
-	container: {}
-}
-
-styles.wrapper = {
-	height: '100%',
-	position: 'relative',
-	display: 'flex',
-	flexDirection: 'column'
-}
-
-styles.body = {
-	flex: 1,
-	display: 'flex',
-	flexDirection: 'column'
-}
-
-styles.container = {
-	height: '100%',
-	width: '100%',
-	overflow: 'scroll'
+const styles: { [key: string]: CSSProperties } = {
+	wrapper: {
+		height: '100%',
+		position: 'relative',
+		display: 'flex',
+		flexDirection: 'column'
+	},
+	body: {
+		flex: 1,
+		display: 'flex',
+		flexDirection: 'column'
+	},
+	container: {
+		height: '100%',
+		width: '100%',
+		overflow: 'scroll'
+	}
 }
 
 export abstract class NavBarPage<P={}, S={}> extends Component<NavBarPageProps & P, NavBarPageState & S>{
@@ -46,7 +41,6 @@ export abstract class NavBarPage<P={}, S={}> extends Component<NavBarPageProps &
 
 	public render() {
 		let { onLeftClick } = this.props
-		// onLeftClick || (this.hasBack ? () => history.goForward() : undefined)
 		return (
 			<div style={{ ...styles.wrapper }} className={this.props.className}>
 				<NavBar

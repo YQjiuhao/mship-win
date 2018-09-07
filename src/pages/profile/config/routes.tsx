@@ -1,18 +1,19 @@
-import { Router, Route } from '../../../config/route'
-import { TranslationTestPage } from '../../test/TranslationTest';
+import { Route, Switch } from '../../../config/route'
+// import { TranslationTestPage } from '../../test/TranslationTest';
 
-interface RoutesState{
+interface RoutesState {
 }
 
-interface RoutesProps{
+interface RoutesProps {
 }
 
 export class Routes extends Component<RoutesProps, RoutesState>{
-	render(){
+	render() {
 		return (
-			<Router>
-				<Route path='/profile/test' component={TranslationTestPage} />
-			</Router>
+			<Switch>
+				{/* <Route path='/profile/test' component={TranslationTestPage} />
+				<Route path='/profile/testA' component={TranslationTestPage}/> */}
+			</Switch>
 		)
 	}
 }
